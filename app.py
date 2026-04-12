@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import os
 
 app = Flask(__name__)
@@ -19,7 +19,7 @@ def games_page():
 
 @app.route("/add_game", methods=["POST"])
 def add_game():
-    game_name = request.form.get("game_name")
-    if game_name:
-        fav_games.append(game_name)
-    return redirect("/")
+    if request.method == "POST":
+        name = request.form["name"]
+        ingredients = request.form["year"]
+        instructions = request.form["price"]
