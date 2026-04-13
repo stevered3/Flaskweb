@@ -9,8 +9,8 @@
 <div>
     <img src="{{ url_for('static', filename='../uploads/' + game.image) }}" width="200">
     <h3>{{ game.title }}</h3>
-    <p1><strong>Genre:</strong> {{ game.genre }}</p1>
-    <p2>{{ game.description }}</p2>
+    <p><strong>Genre:</strong> {{ game.genre }}</p>
+    <p>{{ game.description }}</p>
 
     <a href="/delete/{{ loop.index0 }}">Delete</a>
 </div>
