@@ -1,0 +1,19 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Game Collection</h2>
+
+{% for game in games % }
+<div>
+    <img src="{{ url_for('static', filename='../uploads/' + game.image) }}" width="200">
+    <h3>{{ game.title }}</h3>
+    <p1><strong>Genre:</strong> {{ game.genre }}</p1>
+    <p2>{{ game.description }}</p2>
+
+    <a href="/delete/{{ loop.index0 }}">Delete</a>
+</div>
+{% endfor %}
+
+{% endblock %}
