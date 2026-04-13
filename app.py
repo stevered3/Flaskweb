@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, session
+from werkzeug.utils import secure_filename
 import os
 
 app = Flask(__name__)
@@ -32,3 +33,27 @@ def add_game():
         name = request.form["title"]
         ingredients = request.form["genre"]
         instructions = request.form["description"]
+
+        file = request.files['image']
+        if not title or not genre or not description:
+            return "Missing fields"
+        
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            file.save(filepath)
+
+            games = get_games()
+            games.append({
+                'title': title,
+                'genre': genre,
+                'description': description,
+                'image': filename
+            })
+            session['games'] = games
+
+            return redirect(url_for('games'))
+        else:
+            return "Invalid file type"
+
+    return render_template('add_game.html')
