@@ -30,9 +30,9 @@ def games():
 @app.route("/add_game", methods=["POST"])
 def add_game():
     if request.method == "POST":
-        name = request.form["title"]
-        ingredients = request.form["genre"]
-        instructions = request.form["description"]
+        title = request.form["title"]
+        genre = request.form["genre"]
+        description = request.form["description"]
 
         file = request.files['image']
         if not title or not genre or not description:
