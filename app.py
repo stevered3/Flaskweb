@@ -17,7 +17,6 @@ def get_games():
         session['games'] = []
     return session['games']
 
-fav_games = []
 
 @app.route("/")
 def home():
