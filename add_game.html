@@ -1,0 +1,15 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Add New Game</h2>
+
+<form method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
+    <input type="text" name="title" id="title" placeholder="Game Title"><br>
+    <input type="text" name="genre" id="genre" placeholder="Genre"><br>
+    <textarea name="description" id="description" placeholder="Description"></textarea><br>
+    <input type="file" name="image" id="image"><br>
+    <button type="submit">Add Game</button>
+</form>
+
+{% endblock %}
