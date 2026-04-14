@@ -6,13 +6,15 @@
     <title>FlaskWeb</title>
 </head>
 <body>
-    <h1>Game Collection</h1>
+    <nav>
+    <a href="/">Home</a>
+    <a href="/games">View Games</a>
+    <a href="/add">Add Game</a>
+</nav>
 
-    <div>
-        <a href="/">Home</a>
-        <a href="/collection">Collection</a>
-        <a href="/add">Add Games</a>
-    </div>
+<hr>
+
+{% block content %}{% endblock %}
     
 </body>
 </html>
