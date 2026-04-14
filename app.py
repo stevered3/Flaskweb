@@ -6,8 +6,10 @@ app = Flask(__name__)
 app.secret_key = "secretykey"
 
 UPLOAD_FOLDER = "uploads"
-app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
+
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+
+app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -56,3 +58,14 @@ def add_game():
             return "Invalid file type"
 
     return render_template('add_game.html')
+
+@app.route('/delete/<int:index>')
+def delete_game(index):
+    games = get_games()
+    if 0 <= index < len(games):
+        games.pop(index)
+        session['games'] = games
+    return redirect(url_for('games'))
+
+if __name__ == '__main__':
+    app.run(debug=True)
