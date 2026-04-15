@@ -5,7 +5,7 @@
 
 <h2>Game Collection</h2>
 
-{% for game in games % }
+{% for game in games %}
 <div>
     <img src="{{ url_for('static', filename='../uploads/' + game.image) }}" width="200">
     <h3>{{ game.title }}</h3>

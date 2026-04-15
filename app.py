@@ -28,7 +28,7 @@ def home():
 def games():
     return render_template('games.html', games=get_games())
 
-@app.route("/add_game", methods=["POST"])
+@app.route("/add", methods=["GET", "POST"])
 def add_game():
     if request.method == "POST":
         title = request.form["title"]
