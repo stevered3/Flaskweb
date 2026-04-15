@@ -5,11 +5,12 @@ import os
 app = Flask(__name__)
 app.secret_key = "secretykey"
 
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
-
 UPLOAD_FOLDER = "static/uploads"
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+
+# ensure folder exists
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 
