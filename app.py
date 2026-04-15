@@ -10,8 +10,13 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
-# ensure folder exists
-os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+# ensure upload folder exists and is a directory
+if os.path.exists(app.config['UPLOAD_FOLDER']):
+    if os.path.isfile(app.config['UPLOAD_FOLDER']):
+        os.remove(app.config['UPLOAD_FOLDER'])
+        os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+else:
+    os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
