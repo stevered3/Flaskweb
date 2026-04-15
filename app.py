@@ -3,16 +3,15 @@ from werkzeug.utils import secure_filename
 import os
 
 app = Flask(__name__)
-app.secret_key = "secretykey"
+app.secret_key = os.environ.get('FLASK_SECRET_KEY', 'secretykey')
 
-UPLOAD_FOLDER = "static/uploads"
+UPLOAD_FOLDER = os.path.join(app.root_path, 'static', 'uploads')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
 # ensure folder exists
-if not os.path.exists(UPLOAD_FOLDER):
-    os.makedirs(UPLOAD_FOLDER)
+os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
