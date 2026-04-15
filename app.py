@@ -5,11 +5,13 @@ import os
 app = Flask(__name__)
 app.secret_key = "secretykey"
 
-UPLOAD_FOLDER = "uploads"
-
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
-app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
+UPLOAD_FOLDER = "static/uploads"
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+if not os.path.exists(UPLOAD_FOLDER):
+    os.makedirs(UPLOAD_FOLDER)
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
